@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crononauta</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Press Start 2P', cursive;
+            line-height: 1.6;
+            background-color: #000000;
+            overflow-x: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .background-image {
+            max-width: calc(50% - 20px); /* Ajuste del tamaño de la imagen */
+            max-height: calc(90vh - 20px); /* Ajuste del tamaño de la imagen */
+            margin: 10px; /* Espacio alrededor de la imagen */
+        }
+
+        #content-container {
+            flex: 1;
+            max-width: calc(50% - 20px); /* Ajuste de la anchura máxima */
+            max-height: calc(90vh - 20px); /* Ajuste de la altura máxima */
+            overflow-y: auto;
+            padding: 20px;
+            color: #ffffff;
+            border: 5px solid #ffcc00; /* Borde amarillo */
+            border-radius: 10px; /* Borde redondeado */
+            transition: transform 1s ease-in-out; /* Animación de transición */
+
+        }
+
+        #content-container:hover {
+            animation: none; /* Detiene la animación al pasar el mouse */
+        }
+
+        h1 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 38px;
+            color: #ffcc00;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 8px 8px 12px rgba(0, 0, 0, 0.7);
+            border: 9px solid #ffcc00;
+            padding: 10px;
+            display: inline-block; /* Cambia a inline-block */
+            line-height: 1;
+        }
+
+        p {
+            font-size: 18px;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color: #ffcc00;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+            font-family: 'Press Start 2P', cursive;
+            color: #2b2b2b;
+            z-index: 1;
+        }
+
+        .back-button:hover {
+            background-color: #ffdb4d;
+            color: #2b2b2b;
+        }
+
+    </style>
+</head>
+<body onload="scrollText(document.getElementById('content-container'))">
+
+    <img class="background-image" src="img/fondob1.png" alt="Background">
+
+    <div id="content-container">
+    <h1>CRONONAUTA</h1>
+    <p>En un rincón olvidado del cosmos, emerge la leyenda de Waimuq, un mundo vivo entre mundos, imbuido de una esencia cósmica que da vida a todas las formas de existencia. Sin embargo, la paz en Waimuq se ve amenazada por los Qaraq’Al, una especie ambiciosa que anhela poder sobre todas las cosas.</p>
+    <p>En Waimuq, la vida florece en armonía con la energía primordial del planeta, sus paisajes son un testamento de la belleza y la diversidad que pueden existir cuando los seres se unen en equilibrio. No obstante, la codicia de los Qaraq’Al comienza a socavar este delicado balance.</p>
+    <p>Un joven miembro de los Qaraq’Al, cuyo nombre se perdió en el flujo del tiempo, descubre que al absorber la energía vital de Waimuq, puede obtener poderes sin igual. Impulsado por la ambición, este individuo y sus compañeros de especie comienzan a explotar los recursos del planeta sin consideración por las consecuencias.</p>
+    <p>Mientras los Qaraq’Al se regodean en su creciente poder, Waimuq comienza a desmoronarse a su alrededor. Sus bosques se marchitan, sus ríos se secan y su corazón palpitante se marchita lentamente. La avaricia y la ambición de los Qaraq’Al han llevado al mundo vivo al borde de la destrucción.</p>
+    <p>En medio de la desolación, un héroe emerge entre los Qaraq’Al, impulsado por un sentido de culpa y una necesidad de redención. Este individuo se embarca en un viaje para descubrir la verdad detrás de la caída de Waimuq.</p>
+    <p>Guiado por una voz susurrante que emerge de las entrañas de Waimuq, el héroe descubre los portales temporales ocultos entre las raíces de unas antiguas plantas. Decidido a cambiar el destino de su mundo, se aventura a través de los portales, dispuesto a enfrentarse a su propio pasado y restaurar el equilibrio de Waimuq.</p>
+    <p>En su búsqueda, el héroe se encuentra con la esencia misma de Waimuq, que le revela la verdad detrás de su agonía. El planeta, sintiente y sufriendo, le ruega al héroe que corrija los errores del pasado y restaure su equilibrio antes de que sea demasiado tarde.</p>
+    <p>Con el destino de Waimuq en sus manos, el héroe se sumerge una vez más en los portales, dispuesto a enfrentarse a su propio destino y salvar a su mundo vivo de la destrucción inminente. En una carrera contra el tiempo, el héroe lucha por la redención y la esperanza en un universo que pende de un hilo.</p>
+    <p>Así, el viaje de nuestro héroe se convierte en una epopeya de redención y sacrificio, donde el destino de un mundo vivo yace en las manos de aquellos dispuestos a desafiar el poder y la ambición por el bien de todos.</p>
+    </div>
+
+<button class="back-button" onclick="window.location.href = 'index.html';">Atrás</button>
+
+<script src="script.js"></script>
+
+</body>
+</html>

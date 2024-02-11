@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crononauta</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Press Start 2P', cursive;
+            background-color: #000000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .container {
+            width: 360px;
+            height: 640px;
+            border: 3px solid #ffcc00;
+            padding: 10px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .container:hover {
+            transform: scale(1.05); /* Rotación de 5 grados */
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            cursor: pointer; /* Cambiar el cursor al pasar sobre las imágenes */
+        }
+
+        .button {
+            padding: 15px 30px; /* Ajustar el padding para que coincida con el estilo de los botones back-button */
+            font-size: 18px; /* Ajustar el tamaño de la fuente */
+            font-family: 'Press Start 2P', cursive;
+            background-color: #ffcc00;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s ease-in-out;
+            color: #2b2b2b;
+        }
+
+        .button:hover {
+            background-color: #ffdb4d;
+        }
+
+        #back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+        }
+
+        /* Aumentar el espacio entre los contenedores */
+        .container:not(:first-child) {
+            margin-left: 100px; /* Ajusta el espacio horizontal entre los contenedores */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <a href="cesar.html">
+        <img src="img/caesarimg.jpg" alt="Imagen de Caesar">
+    </a>
+    <button class="button" onclick="location.href='cesar.html'">Caesar</button>
+</div>
+
+<div class="container">
+    <a href="gerald.html">
+        <img src="img/geraldimg.jpg" alt="Imagen de Gerald">
+    </a>
+    <button class="button" onclick="location.href='gerald.html'">Gerald</button>
+</div>
+
+<button class="button" id="back-button" onclick="location.href='index.html'">Atrás</button>
+
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crononauta</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Press Start 2P', cursive;
+            line-height: 1.6;
+            background-color: #000000;
+            overflow-x: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .background-image {
+            max-width: calc(50% - 20px); /* Ajuste del tamaño de la imagen */
+            max-height: calc(90vh - 20px); /* Ajuste del tamaño de la imagen */
+            margin: 10px; /* Espacio alrededor de la imagen */
+        }
+
+        #content-container {
+            flex: 1;
+            max-width: calc(50% - 20px); /* Ajuste de la anchura máxima */
+            max-height: calc(90vh - 20px); /* Ajuste de la altura máxima */
+            overflow-y: auto;
+            padding: 20px;
+            color: #ffffff;
+            border: 5px solid #ffcc00; /* Borde amarillo */
+            border-radius: 10px; /* Borde redondeado */
+            transition: transform 1s ease-in-out; /* Animación de transición */
+
+        }
+
+        #content-container:hover {
+            animation: none; /* Detiene la animación al pasar el mouse */
+        }
+
+        h1 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 38px;
+            color: #ffcc00;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 8px 8px 12px rgba(0, 0, 0, 0.7);
+            border: 9px solid #ffcc00;
+            padding: 10px;
+            display: inline-block; /* Cambia a inline-block */
+            line-height: 1;
+        }
+
+        p {
+            font-size: 18px;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color: #ffcc00;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+            font-family: 'Press Start 2P', cursive;
+            color: #2b2b2b;
+            z-index: 1;
+        }
+
+        .back-button:hover {
+            background-color: #ffdb4d;
+            color: #2b2b2b;
+        }
+
+    </style>
+</head>
+<body onload="scrollText(document.getElementById('content-container'))">
+
+    <img class="background-image" src="img/fondob1.png" alt="Background">
+
+    <div id="content-container">
+            <h1>César León - Artista</h1>
+            <p>Arte visual, música, literatura y performance. Son las disciplinas más comunes de su trabajo. Principalmente, explora los elementos más abstractos de estas, pues no busca convencionalismos ni crear obras de carácter tradicional. Los temas por los que más se muestra interesado suelen ser la muerte, la conciencia, el dolor, la violencia y la metafísica. Sus obras en general buscan reflejar su catarsis, todas contienen una carga emocional, pues esos conceptos filosóficos son los que más lo inspiran. Por ejemplo, se plasma mucho su sentido de miedo hacia la muerte, su fascinación por la expansión de la conciencia o su curiosidad por expresar el dolor.</p>
+            <p>Los elementos más empleados en su obra visual suelen ser la expresión de las emociones mediante las formas tensas, los colores fríos y brillantes, la composición equilibrada y el ritmo agresivo. Igualmente ese ritmo agresivo es una característica de sus canciones, pues su estilo se mueve entre el rock, el metal y la música psicodélica. El caos y la agresividad para tocar los instrumentos y moverse por el escenario los considera como parte de su propia obra, pues cada canción conlleva una presentación específica con el cuerpo. Por otro lado, los movimientos que escoge para hacer performance escénico suelen ser improvisados, pues mediante la expresividad del cuerpo busca reflejar las emociones más profundas de sí mismo, sin usar palabras.</p>
+    </div>
+
+<button class="back-button" onclick="window.location.href = 'equipo.html';">Atrás</button>
+
+<script src="script.js"></script>
+
+</body>
+</html>

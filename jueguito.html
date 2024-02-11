@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minijuego</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            cursor: none; /* Ocultar el cursor predeterminado */
+            font-family: 'Press Start 2P', cursive;
+            background-image: url('img/campojuego.png'); /* Nueva imagen de fondo */
+            background-size: cover;
+        }
+        #gatito {
+            position: absolute;
+            width: 150px; /* Nuevo tamaño: triple del tamaño original */
+            height: 150px; /* Nuevo tamaño: triple del tamaño original */
+            top: calc(50% - 75px); /* Centrar verticalmente */
+            left: calc(50% - 75px); /* Centrar horizontalmente */
+        }
+        .pisada {
+            position: absolute;
+            width: 150px; /* Nuevo tamaño: triple del tamaño original */
+            height: 150px; /* Nuevo tamaño: triple del tamaño original */
+            display: none; /* Ocultar las imágenes de las pisadas inicialmente */
+        }
+        .pisada:first-child {
+            display: block; /* Mostrar la primera imagen de pisada inicialmente */
+        }
+        .abejita {
+            position: absolute;
+            width: 90px; /* Nuevo tamaño: triple del tamaño original */
+            height: 90px; /* Nuevo tamaño: triple del tamaño original */
+            background-image: url('img/abejita.png'); /* Ruta a la imagen de la abejita */
+            background-size: cover;
+        }
+        #popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #000;
+            border: 5px solid #ffcc00;
+            border-radius: 20px;
+            padding: 20px;
+            z-index: 9999;
+            text-align: center;
+        }
+        #popup {
+            color: #ffcc00;
+            font-size: 24px;
+        }
+        #popup-buttons {
+            margin-top: 20px;
+        }
+        #popup-buttons button {
+            margin: 0 10px;
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color: #ffcc00;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+            font-family: 'Press Start 2P', cursive;
+            color: #2b2b2b;
+        }
+        #popup-buttons button:hover {
+            background-color: #ffdb4d;
+            color: #2b2b2b;
+        }
+
+        #contador {
+            position: fixed;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #000;
+            color: #ffcc00;
+            padding: 10px 20px;
+            border: 5px solid #ffcc00;
+            border-radius: 8px;
+            font-size: 18px;
+            font-family: 'Press Start 2P', cursive; /* Agregando la misma fuente */
+            z-index: 9999; /* Asegurar que esté sobre otros elementos */
+        }
+    </style>
+</head>
+<body>
+    <img id="gatito" src="img/gatito.png" alt="Gatito">
+    <img id="pisada1" class="pisada" src="img/pisada1.png" alt="Paso">
+    <div id="popup">
+        <p id="popup-message">Cuidado con las abejas!!!</p>
+        <div id="popup-buttons">
+            <button id="inicio">Volver</button>
+            <button id="jugar-otra-vez">Jugar</button>
+        </div>
+    </div>
+    <div id="contador">Tiempo restante: <span id="tiempo"></span></div> <!-- Nuevo elemento para el contador -->
+    <script src="script.js"></script>
+</body>
+</html>

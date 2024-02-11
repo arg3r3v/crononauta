@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Futuro</title>
+<style>
+    body {
+        margin: 0;
+        overflow: hidden;
+        background-image: url('img/fondoeditado.png');
+        background-size: cover;
+    }
+    canvas {
+        display: block;
+    }
+</style>
+</head>
+<body>
+<canvas id="gameCanvas"></canvas>
+
+<script>
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+
+    // Establecer el tamaño del canvas igual al tamaño de la pantalla
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const gatito = new Image();
+    gatito.src = 'img/gatito.png';
+    const pisada = new Image();
+    pisada.src = 'img/pisada1.png';
+    const plataforma = new Image();
+    plataforma.src = 'img/plataforma1.png';
+    const plataformalarga = new Image();
+    plataformalarga.src = 'img/islalarga1.png'; // Corregido el nombre de la imagen
+    const meta = new Image();
+    meta.src = 'img/cebolla1.png';
+    const gatitoFantasma = new Image();
+    gatitoFantasma.src = 'img/enemigofangr1.png';
+
+    const gatitoFrames = ['img/gatito.png', 'img/pisada1.png']; // Definir el arreglo con las rutas de las imágenes del gatito
+    let currentFrameIndex = 0; // Índice del fotograma actual
+    const gatitoWidth = 150;
+    const plataformaWidth = 400;
+    const plataformaHeight = 160;
+    const plataformalargaWidth = 756;
+    const plataformalargaHeight = 180;
+    const metaWidth = 150;
+    const metaHeight = 150;
+    const gatitoFantasmaWidth = 150;
+    const gatitoFantasmaHeight = 150;
+
+    let gatitoX = 50;
+    let gatitoY = 50;
+    let cameraX = 0;
+
+    const GRAVITY = 0.5;
+    let vx = 0;
+    let vy = 0;
+    let jumping = false;
+    let doubleJump = false; // Agregar esta variable para el doble salto
+
+    const metaX = 2500;
+    const metaY = 200;
+
+    // Arreglo de posiciones de las plataformas
+    const platformPositions = [
+        { x: 100, y: 500 },
+        { x: 700, y: 150 },
+        { x: 1500, y: 150 },
+        { x: 1000, y: 600 },
+        { x: 2300, y: 350 }
+    ];
+
+    // Arreglo de posiciones de las plataformas largas
+    const platformlargaPositions = [
+        { x: -50, y: 600 },
+        { x: 1700, y: 600 }
+    ];
+
+    // Arreglo de posiciones de los fantasmas
+    const ghostKittens = [
+        { x: 3250, y: 300, speed: 2 },
+        { x: 3500, y: 200, speed: 3 },
+        { x: 2250, y: 100, speed: 3 },
+        { x: 2500, y: 300, speed: 2 },
+        { x: 1150, y: 200, speed: 3 },
+        { x: 2000, y: 100, speed: 3 },
+        { x: 1000, y: 300, speed: 2 },
+        { x: 500, y: 200, speed: 3 },
+        { x: 750, y: 100, speed: 3 },
+        { x: 2750, y: 300, speed: 2 },
+        { x: 3750, y: 200, speed: 3 },
+        { x: 2400, y: 100, speed: 3 }
+    ];
+
+    // Función para cambiar el fotograma del gatito
+    function changeGatitoFrame() {
+        currentFrameIndex = (currentFrameIndex + 1) % gatitoFrames.length;
+        gatito.src = gatitoFrames[currentFrameIndex];
+    }
+    // Intervalo para cambiar los fotogramas del gatito cada 500 milisegundos
+    const gatitoFrameInterval = setInterval(changeGatitoFrame, 500); // Cambiar cada 500 milisegundos
+
+    function draw() {
+        // Limpiar el canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Dibujar plataformas
+        platformPositions.forEach(position => {
+            ctx.drawImage(plataforma, position.x - cameraX, position.y, plataformaWidth, plataformaHeight);
+        });
+
+        // Dibujar plataformas largas
+        platformlargaPositions.forEach(position => {
+            ctx.drawImage(plataformalarga, position.x - cameraX, position.y, plataformalargaWidth, plataformalargaHeight);
+        });
+
+        // Dibujar meta
+ctx.drawImage(meta, metaX - cameraX, metaY, metaWidth, metaHeight);
+
+        // Dibujar gatito
+        ctx.drawImage(gatito, gatitoX - cameraX, gatitoY, gatitoWidth, gatitoWidth);
+
+        // Dibujar fantasmas
+        ghostKittens.forEach(ghost => {
+            ctx.drawImage(gatitoFantasma, ghost.x - cameraX, ghost.y, gatitoFantasmaWidth, gatitoFantasmaHeight);
+        });
+
+        // Mover cámara al tamaño del canvas
+        cameraX = Math.max(0, gatitoX - canvas.width / 2);
+
+        requestAnimationFrame(draw);
+    }
+
+    function update() {
+        // Gravedad
+        vy += GRAVITY;
+        gatitoY += vy;
+
+        // Movimiento horizontal
+        gatitoX += vx;
+
+        // Actualizar posición de los gatitos fantasmas
+        ghostKittens.forEach(ghost => {
+            // Lógica para mover los gatitos fantasmas hacia el jugador en ambos ejes
+            if (ghost.x > gatitoX) {
+                ghost.x -= ghost.speed;
+            } else if (ghost.x < gatitoX) {
+                ghost.x += ghost.speed;
+            }
+
+            if (ghost.y > gatitoY) {
+                ghost.y -= ghost.speed;
+            } else if (ghost.y < gatitoY) {
+                ghost.y += ghost.speed;
+            }
+
+            // Lógica para verificar colisiones con el jugador y hacerlos desaparecer
+            const ghostRect = {
+                x: ghost.x,
+                y: ghost.y,
+                width: gatitoFantasmaWidth,
+                height: gatitoFantasmaHeight
+            };
+
+            const gatitoRect = {
+                x: gatitoX,
+                y: gatitoY,
+                width: gatitoWidth,
+                height: gatitoWidth
+            };
+
+            if (checkCollision(ghostRect, gatitoRect)) {
+                // Eliminar el gatito fantasma del arreglo
+                const index = ghostKittens.indexOf(ghost);
+                if (index !== -1) {
+                    ghostKittens.splice(index, 1);
+                }
+            }
+        });
+
+        // Colisión con plataformas normales
+        platformPositions.forEach(position => {
+            const platformRect = {
+                x: position.x - cameraX,
+                y: position.y,
+                width: plataformaWidth,
+                height: plataformaHeight / 100 // Reducir la altura a la mitad
+            };
+
+            const gatitoRect = {
+                x: gatitoX - cameraX,
+                y: gatitoY,
+                width: gatitoWidth,
+                height: gatitoWidth
+            };
+
+            if (
+                gatitoRect.y + gatitoRect.height >= platformRect.y && // Parte inferior del gatito por encima de la parte superior de la plataforma
+                gatitoRect.y < platformRect.y + platformRect.height && // Parte superior del gatito por debajo de la parte inferior de la plataforma
+                gatitoRect.x + gatitoRect.width > platformRect.x && // Lado derecho del gatito a la izquierda del lado derecho de la plataforma
+                gatitoRect.x < platformRect.x + platformRect.width // Lado izquierdo del gatito a la derecha del lado izquierdo de la plataforma
+            ) {
+                // Verificar si el gatito está cayendo
+                if (vy > 0) {
+                    // Ajustar la posición del gatito en función de la colisión
+                    gatitoY = platformRect.y - gatitoRect.height;
+                    vy = 0;
+                    jumping = false;
+                    doubleJump = true; // Restablecer el doble salto cuando toca una plataforma
+                }
+            }
+        });
+
+        // Colisión con plataformas largas
+        platformlargaPositions.forEach(position => {
+            const platformRect = {
+                x: position.x - cameraX,
+                y: position.y,
+                width: plataformalargaWidth,
+                height: plataformalargaHeight / 100
+            };
+
+            const gatitoRect = {
+                x: gatitoX - cameraX,
+                y: gatitoY,
+                width: gatitoWidth,
+                height: gatitoWidth
+            };
+
+            if (
+                gatitoRect.y + gatitoRect.height >= platformRect.y && // Parte inferior del gatito por encima de la parte superior de la plataforma
+                gatitoRect.y < platformRect.y + platformRect.height && // Parte superior del gatito por debajo de la parte inferior de la plataforma
+                gatitoRect.x + gatitoRect.width > platformRect.x && // Lado derecho del gatito a la izquierda del lado derecho de la plataforma
+                gatitoRect.x < platformRect.x + platformRect.width // Lado izquierdo del gatito a la derecha del lado izquierdo de la plataforma
+            ) {
+                // Verificar si el gatito está cayendo
+                if (vy > 0) {
+                    // Ajustar la posición del gatito en función de la colisión
+                    gatitoY = platformRect.y - gatitoRect.height;
+                    vy = 0;
+                    jumping = false;
+                    doubleJump = true; // Restablecer el doble salto cuando toca una plataforma
+                }
+            }
+        });
+
+        // Colisión con meta
+        const metaRect = {
+            x: metaX - cameraX,
+            y: metaY,
+            width: metaWidth,
+            height: metaHeight
+        };
+
+        const gatitoRect = {
+            x: gatitoX - cameraX,
+            y: gatitoY,
+            width: gatitoWidth,
+            height: gatitoWidth
+        };
+
+        if (checkCollision(metaRect, gatitoRect)) {
+            alert('¡Ganaste!');
+        }
+
+        requestAnimationFrame(update);
+    }
+
+    draw();
+    update();
+
+    // Manejo de teclado
+    window.addEventListener('keydown', function(event) {
+        switch (event.code) {
+            case 'ArrowLeft': // Izquierda
+                vx = -5; // Ajusta la velocidad horizontal hacia la izquierda
+                break;
+            case 'ArrowRight': // Derecha
+                vx = 5; // Ajusta la velocidad horizontal hacia la derecha
+                break;
+            case 'Space': // Espacio (saltar)
+                if (!jumping) {
+                    vy = -10; // Ajusta la velocidad vertical para un salto más alto
+                    jumping = true;
+                } else if (doubleJump) {
+                    vy = -15; // Ajusta la velocidad vertical para un segundo salto más alto
+                    doubleJump = false; // Desactiva el doble salto después de usarlo
+                }
+                break;
+        }
+    });
+
+    // Detener el movimiento cuando se suelta la tecla
+    window.addEventListener('keyup', function(event) {
+        switch (event.code) {
+            case 'ArrowLeft':
+            case 'ArrowRight':
+                vx = 0; // Detener el movimiento horizontal
+                break;
+        }
+    });
+
+    function checkCollision(rect1, rect2) {
+        return (
+            rect1.x < rect2.x + rect2.width &&
+            rect1.x + rect1.width > rect2.x &&
+            rect1.y < rect2.y + rect2.height &&
+            rect1.y + rect1.height > rect2.y
+        );
+    }
+</script>
+
+</body>
+</html>

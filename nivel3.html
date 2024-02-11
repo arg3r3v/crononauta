@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pasado</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            cursor: none;
+            font-family: 'Press Start 2P', cursive;
+            background-image: url('img/nivelfinal1.png'); /* Nueva imagen de fondo */
+            background-size: cover;
+        }
+
+        #game-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+        }
+
+        #gatito {
+            position: absolute;
+            left: 50%;
+            bottom: 10px;
+            transform: translateX(-50%);
+        }
+
+        .gatito img {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            transform: translateX(-50%);
+        }
+
+        #pisada {
+            /* Ajusta la posición de la pisada si es necesario */
+            left: 0;
+            opacity: 0; /* Ocultar la pisada al principio */
+        }
+
+        .enemy {
+            position: absolute;
+            width: 120px;
+            height: 90px;
+            background-image: url('img/enemigof1.png');
+            background-size: cover;
+        }
+
+        #boss {
+            position: absolute;
+            width: 190px;
+            height: 90px;
+            background-image: url('img/jefe2.png');
+            background-size: cover;
+        }
+
+        .laser,
+        .boss-laser {
+            position: absolute;
+            width: 6px;
+            height: 40px;
+            background-color: #00ff00;
+        }
+
+        .boss-laser {
+            background-color: red;
+        }
+
+        #score {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            color: white;
+            font-size: 24px;
+            z-index: 9999;
+        }
+
+        #health {
+            position: absolute;
+            top: 30px;
+            right: 10px;
+            color: white;
+            font-size: 24px;
+            z-index: 9999;
+        }
+
+        /* Estilo para el gatito en estado de colisión */
+        .collision {
+            filter: saturate(8) brightness(0.5) hue-rotate(180deg);
+        }
+
+        /* Estilo para los pop-ups */
+        .popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #000;
+            border: 5px solid #ffcc00;
+            border-radius: 20px;
+            padding: 20px;
+            z-index: 9999;
+            text-align: center;
+        }
+        .popup {
+            color: #ffcc00;
+            font-size: 24px;
+        }
+        .popup-buttons {
+            margin-top: 20px;
+        }
+        .popup-buttons button {
+            margin: 0 10px;
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color: #ffcc00;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+            font-family: 'Press Start 2P', cursive;
+            color: #2b2b2b;
+        }
+        .popup-buttons button:hover {
+            background-color: #ffdb4d;
+            color: #2b2b2b;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="game-container">
+        <img id="gatito" src="img/gatito.png" alt="Gatito">
+    </div>
+
+    <div id="popup-nivel3" class="popup">
+        <h2>Dispara con la barra espaciadora.</h2>
+        <div class="popup-buttons">
+            <button id="inicioButtonPerdiste">Volver</button>
+            <button id="jugarButton">Jugar</button>
+        </div>
+    </div>
+
+    <div id="popup-ganaste" class="popup">
+        <h2>Ganaste</h2>
+        <div class="popup-buttons">
+            <button id="finalButton">Final</button>
+        </div>
+    </div>
+
+    <div id="popup-perdiste" class="popup">
+        <h2>Perdiste</h2>
+        <div class="popup-buttons">
+            <button id="volverButtonPerdiste">Volver</button>
+        </div>
+    </div>
+    <script src="script3.js"></script>
+
+</body>
+
+</html>

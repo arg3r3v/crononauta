@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crononauta</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap">
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Press Start 2P', cursive;
+            line-height: 1.6;
+            background-color: #000000;
+            overflow-x: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .background-image {
+            max-width: calc(50% - 20px); /* Ajuste del tamaño de la imagen */
+            max-height: calc(90vh - 20px); /* Ajuste del tamaño de la imagen */
+            margin: 10px; /* Espacio alrededor de la imagen */
+        }
+
+        #content-container {
+            flex: 1;
+            max-width: calc(50% - 20px); /* Ajuste de la anchura máxima */
+            max-height: calc(90vh - 20px); /* Ajuste de la altura máxima */
+            overflow-y: auto;
+            padding: 20px;
+            color: #ffffff;
+            border: 5px solid #ffcc00; /* Borde amarillo */
+            border-radius: 10px; /* Borde redondeado */
+            transition: transform 1s ease-in-out; /* Animación de transición */
+
+        }
+
+        #content-container:hover {
+            animation: none; /* Detiene la animación al pasar el mouse */
+        }
+
+        h1 {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 38px;
+            color: #ffcc00;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 8px 8px 12px rgba(0, 0, 0, 0.7);
+            border: 9px solid #ffcc00;
+            padding: 10px;
+            display: inline-block; /* Cambia a inline-block */
+            line-height: 1;
+        }
+
+        p {
+            font-size: 18px;
+        }
+
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color: #ffcc00;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+            font-family: 'Press Start 2P', cursive;
+            color: #2b2b2b;
+            z-index: 1;
+        }
+
+        .back-button:hover {
+            background-color: #ffdb4d;
+            color: #2b2b2b;
+        }
+
+    </style>
+</head>
+<body onload="scrollText(document.getElementById('content-container'))">
+
+    <img class="background-image" src="img/fondob1.png" alt="Background">
+
+    <div id="content-container">
+            <h1>Gerardo Arcos - Artista</h1>
+            <p>Soy Gerardo Arcos, un artista digital apasionado por generar espacios que saquen a las personas de su cotidianidad y las inviten a reflexionar. A través de técnicas plásticas como la pintura y la escultura, así como del modelado 3D y la animación, busco explorar las fronteras entre lo físico y lo virtual.</p>
+            <p>Mi práctica artística se caracteriza por la experimentación constante.</p>
+            <p>En mi proceso creativo, me sumerjo en la experimentación, permitiendo que las ideas y conceptos se desarrollen de forma orgánica. Me impulsa la necesidad de generar un impacto emocional en el espectador, de provocar preguntas y abrir espacios para la reflexión. A través de mis obras, busco crear una conexión íntima con quienes las observan, invitándolos a explorar nuevas perspectivas y cuestionar su realidad.</p>
+            <p>En el futuro, aspiro a seguir expandiendo mi práctica artística, explorando nuevas tecnologías y medios que me permitan ampliar los límites de mi expresión creativa. Mi objetivo es contribuir al diálogo artístico y social, generando obras que provoquen cambios y promuevan la reflexión en nuestra sociedad.</p>
+    </div>
+
+<button class="back-button" onclick="window.location.href = 'equipo.html';">Atrás</button>
+
+<script src="script.js"></script>
+
+</body>
+</html>
