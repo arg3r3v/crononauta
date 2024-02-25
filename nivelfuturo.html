@@ -20,6 +20,9 @@
 <canvas id="gameCanvas"></canvas>
 
 <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        alert('Los Fantasmas no pueden hacerte daño, llega a la meta para pasar al siguiente nivel');
+    });
     const canvas = document.getElementById('gameCanvas');
     const ctx = canvas.getContext('2d');
 
