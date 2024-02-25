@@ -82,7 +82,6 @@
     document.getElementById('jugarButton').addEventListener('click', function () {
         popupNivel3.style.display = 'none';
         gameInterval = setInterval(generarEnemigos, 1000);
-        document.addEventListener('mousemove', moverGatito); // Agregar el manejador de eventos del mouse después de presionar "Jugar"
     });
 
         // Función para manejar el movimiento del mouse
