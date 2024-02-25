@@ -81,7 +81,6 @@
             // Agregar el manejador de eventos para el botón "Jugar"
     document.getElementById('jugarButton').addEventListener('click', function () {
         popupNivel3.style.display = 'none';
-        gameContainer.style.cursor = 'none'; // Ocultar el cursor después de presionar "Jugar"
         gameInterval = setInterval(generarEnemigos, 1000);
         document.addEventListener('mousemove', moverGatito); // Agregar el manejador de eventos del mouse después de presionar "Jugar"
     });
